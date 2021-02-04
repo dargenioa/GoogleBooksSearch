@@ -32,19 +32,22 @@ function Books() {
       });
   };
 
-
-  // const handleBookSave = (id) => {
-  //   const book = books.find((book) => book.id === id);
-
-  //   API.saveBook({
-  //     googleId: book.items.id,
-  //     title: book.items.volumeInfo.title,
-  //     link: book.items.volumeInfo.infoLink,
-  //     authors: book.items.volumeInfo.authors,
-  //     description: book.items.volumeInfo.description,
-  //     image: book.items.volumeInfo.imageLinks.thumbnail,
-  //   }).then(() => getBooks(query));
-  // };
+//delete - use .then(books after to reset the state and return new set of books from db)
+  const handleBookSave = (id) => {
+    const book = books.find((book) => book.id === id);
+    API.saveBook({
+      googleId: book.id,
+      title: book.volumeInfo.title,
+      link: book.volumeInfo.infoLink,
+      authors: book.volumeInfo.authors,
+      description: book.volumeInfo.description,
+      image: book.volumeInfo.imageLinks.thumbnail,
+    })
+    .then(() => books)
+    .catch((err) => {
+      console.log(err);
+    })
+  };
 
   return (
     <Container>
@@ -83,7 +86,7 @@ function Books() {
                     image={book.volumeInfo.imageLinks.thumbnail}
                     Button={() => (
                       <button
-                        // onClick={() => handleBookSave(book.id)}
+                        onClick={() => handleBookSave(book.id)}
                         className="btn btn-primary ml-2"
                       >
                         Save
