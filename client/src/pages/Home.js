@@ -17,24 +17,25 @@ function Books() {
   // }, [query]);
 
   const handleInputChange = (event) => {
-    setQuery(event.target.value)
+    setQuery(event.target.value);
   };
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
     API.getBooks(query)
       .then((res) => {
-      console.log(res);
-      setBooks(res.data.items)
+        console.log(res);
+        setBooks(res.data.items);
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-//delete - use .then(books after to reset the state and return new set of books from db)
+  //delete - use .then(books after to reset the state and return new set of books from db)
   const handleBookSave = (id) => {
     const book = books.find((book) => book.id === id);
+    console.log()
     API.saveBook({
       googleId: book.id,
       title: book.volumeInfo.title,
@@ -43,10 +44,10 @@ function Books() {
       description: book.volumeInfo.description,
       image: book.volumeInfo.imageLinks.thumbnail,
     })
-    .then(() => books)
-    .catch((err) => {
-      console.log(err);
-    })
+      .then(() => books)
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -54,7 +55,7 @@ function Books() {
       <Row>
         <Col size="md-12">
           <Jumbotron>
-            <h1 className="text-center" >
+            <h1 className="text-center">
               <strong>(React) Google Books Search</strong>
             </h1>
             <h2 className="text-center">
@@ -75,6 +76,7 @@ function Books() {
       <Row>
         <Col size="md-12">
           <Card title="Results">
+            {books.length ? (
               <List>
                 {books.map((book) => (
                   <Book
@@ -95,6 +97,9 @@ function Books() {
                   />
                 ))}
               </List>
+            ) : (
+              <h2 className="text-center">There are no book results</h2>
+            )}
           </Card>
         </Col>
       </Row>
