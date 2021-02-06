@@ -11,10 +11,10 @@ function Saved() {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
-    getSavedBooks();
+    SavedBooks();
   }, []);
 
-  const getSavedBooks = () => {
+  const SavedBooks = () => {
     API.getSavedBooks()
       .then((res) => {
         setBooks(res.data);
@@ -24,7 +24,7 @@ function Saved() {
 
   const handleBookDelete = (id) => {
     API.deleteBook(id).then((res) => {
-      setBooks(res.data);
+      SavedBooks();
     });
   };
 
