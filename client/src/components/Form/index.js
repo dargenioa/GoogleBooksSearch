@@ -12,7 +12,7 @@ function Form({ query, handleInputChange, handleFormSubmit }) {
           id="Title"
           type="text"
           value={query}
-          placeholder="Ready Player One"
+          placeholder="Enter a search term"
           name="query"
           onChange={handleInputChange}
           required
