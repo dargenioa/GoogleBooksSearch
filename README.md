@@ -18,7 +18,7 @@ GoogleBooksSearch is a React application that allows a user to search for book t
 
 ## VideoDemo
 
-![](./public/images/employeeDirectoryDemo.gif)
+![](./assets/GoogleBooksSearch.gif)
 
 ## Installation
 
